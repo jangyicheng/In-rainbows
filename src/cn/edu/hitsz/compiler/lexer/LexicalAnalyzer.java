@@ -66,7 +66,7 @@ public class LexicalAnalyzer {
 
 
                 case IN_IDENTIFIER:
-                    if (Character.isLetterOrDigit(word[i])) {
+                    if (Character.isLetterOrDigit(word[i]) | word[i]=='-') {
                         identifier+=word[i];
                         i++;
                         state = State.IN_IDENTIFIER; // 继续保持在 IN_IDENTIFIER 状态
