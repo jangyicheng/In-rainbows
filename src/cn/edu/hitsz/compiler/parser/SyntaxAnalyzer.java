@@ -87,22 +87,16 @@ public class SyntaxAnalyzer {
 
 
     private LRTable lrTable;
-    private Status initStatus;
 
     public void loadLRTable(LRTable table) {
         // TODO: 加载 LR 分析表
         // 你可以自行选择要如何使用该表格:
         // 是直接对 LRTable 调用 getAction/getGoto, 抑或是直接将 initStatus 存起来使用
         this.lrTable = table;
-        this.initStatus = table.getInit();
     }
 
 
-    private Token getHead(Production production) {
-        NonTerminal head = production.head();
-        // 使用 simple 方法创建一个简单的 Token 对象
-        return Token.simple(head.toString());
-    }
+
     public void run() {
         // 初始化状态栈
         List<Status> stateStack = new ArrayList<>();
@@ -148,6 +142,7 @@ public class SyntaxAnalyzer {
 
                     // 转移状态
                     Status gotoStatus = lrTable.getGoto(topStatus, production.head());
+                    //合着这个符号栈根本就没用啊
                     stateStack.add(gotoStatus);
 
                     // 将产生式左部符号压入符号栈
